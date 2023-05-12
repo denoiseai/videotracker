@@ -1,3 +1,11 @@
+#####################################################
+# video_tracker.py
+#
+# Autor: Ángel López Morales
+# Licencia: MIT
+#####################################################
+
+
 import cv2
 from moviepy.editor import *
 import os
