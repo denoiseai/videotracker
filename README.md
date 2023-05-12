@@ -13,17 +13,17 @@ Este proyecto utiliza el algoritmo de rastreo CSRT para centrar a una persona en
 
 Para instalar las dependencias necesarias, ejecute el siguiente comando:
 
-\```bash
+```bash
 pip install opencv-python opencv-python-headless moviepy tqdm
-\```
+```
 
 ## Uso
 
 Para usar este script, ejecute el siguiente comando en la terminal o línea de comandos:
 
-\```bash
+```bash
 python video_tracker.py input.mp4
-\```
+```
 
 Reemplace `input.mp4` con la ruta de su archivo de video de entrada. El archivo de salida se creará con el mismo nombre que el archivo de entrada, pero con el sufijo "_vertical".
 
