@@ -11,8 +11,24 @@ from moviepy.editor import *
 import os
 import sys
 import argparse
+import cupy as cp
+import numpy as np
 from tqdm import tqdm
 
+def resize_frame(frame, height=1280):
+    (original_height, original_width) = frame.shape[:2]
+    aspect_ratio = original_width / original_height
+
+    new_width = int(height * aspect_ratio)
+    resized_frame = cv2.resize(frame, (new_width, height))
+    return resized_frame
+
+
+def resize_display_frame(frame):
+    display_width = 480
+    display_height = 720
+    resized_frame = cv2.resize(frame, (display_width, display_height), interpolation=cv2.INTER_AREA)
+    return resized_frame
 
 # Configura el analizador de argumentos
 parser = argparse.ArgumentParser(description="Video Tracker")
@@ -28,16 +44,12 @@ tracker = cv2.TrackerCSRT_create()
 # Lee el primer frame del video
 ret, frame = video.read()
 
+frame = resize_frame(frame)
 # Calcula la posición inicial para la ROI
-roi_x = (frame.shape[1] - 720) // 2
-roi_y = (frame.shape[0] - 1280) // 2
-
-# Selecciona la región de interés (ROI) con dimensiones fijas (720x1280)
+roi = cv2.selectROI("Tracker", frame, False, False)
+roi_x, roi_y, _, _ = roi
+print(roi_x, roi_y)
 roi = (roi_x, roi_y, 720, 1280)
-#cv2.rectangle(frame, (roi_x, roi_y), (roi_x + 720, roi_y + 1280), (255, 0, 0), 2)
-#cv2.imshow("ROI", frame)
-#cv2.waitKey(0)
-#cv2.destroyAllWindows()
 
 # Inicializa el tracker con el primer frame y la ROI
 tracker.init(frame, roi)
@@ -59,7 +71,7 @@ frame_count = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
 progress_bar = tqdm(total=frame_count, desc="Procesando video", unit="frame")
 
 
-frames_to_skip = 5
+frames_to_skip = 10
 
 frame_count = 0
 
@@ -120,7 +132,8 @@ while True:
     else:
         print("Error: El objeto VideoWriter no está abierto correctamente.") 
     # Muestra el resultado
-    cv2.imshow("Tracker", cropped_frame)
+    display_frame = resize_display_frame(cropped_frame)
+    cv2.imshow("Tracker", display_frame)
 
     # Termina el bucle si se presiona la tecla 'q'
     if cv2.waitKey(1) & 0xFF == ord('q'):
