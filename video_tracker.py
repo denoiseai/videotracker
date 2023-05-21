@@ -11,8 +11,6 @@ from moviepy.editor import *
 import os
 import sys
 import argparse
-import cupy as cp
-import numpy as np
 from tqdm import tqdm
 
 def resize_frame(frame, height=1280):
