@@ -69,7 +69,7 @@ frame_count = int(video.get(cv2.CAP_PROP_FRAME_COUNT))
 progress_bar = tqdm(total=frame_count, desc="Procesando video", unit="frame")
 
 
-frames_to_skip = 10
+frames_to_skip = 2
 
 frame_count = 0
 
