@@ -27,6 +27,10 @@ python video_tracker.py input.mp4
 
 Reemplace `input.mp4` con la ruta de su archivo de video de entrada. El archivo de salida se creará con el mismo nombre que el archivo de entrada, pero con el sufijo "_vertical".
 
+Seleccione el objeto que quiere hacer el track (ROI) y pulse enter.
+
+
+
 ## Licencia
 
 Este proyecto está licenciado bajo la [Licencia MIT](LICENSE).
