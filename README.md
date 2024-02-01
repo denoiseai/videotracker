@@ -14,7 +14,7 @@ Este proyecto utiliza el algoritmo de rastreo CSRT para centrar a una persona en
 Para instalar las dependencias necesarias, ejecute el siguiente comando:
 
 ```bash
-pip install opencv-python opencv-python-headless moviepy tqdm
+pip install opencv-python opencv-python-headless opencv-contrib-python moviepy tqdm
 ```
 
 ## Uso
